@@ -40,21 +40,17 @@
                             <thead>
                             <tr>
                                 <th class="table-plus datatable-nosort">Name</th>
-                                <th>Email</th>
-                                <th>Phone Number</th>
-                                <th>User Type</th>
+                                <th>Description</th>
                                 <th>Created On</th>
                                 <th class="datatable-nosort">Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($users as $user)
+                            @foreach($vendors as $vendor)
                                 <tr>
-                                    <td class="table-plus">{{$user->name}}</td>
-                                    <td>{{$user->email}}</td>
-                                    <td>{{$user->phone}}</td>
-                                    <td>{{\App\Helper\Formatter::userType($user->user_type)}}</td>
-                                    <td>{{$user->created_at}}</td>
+                                    <td class="table-plus">{{$vendor->name}}</td>
+                                    <td>{{$vendor->description}}</td>
+                                    <td>{{$vendor->created_at}}</td>
                                     <td>
                                         <div class="dropdown">
                                             <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button"

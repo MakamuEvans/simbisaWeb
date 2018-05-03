@@ -25,6 +25,15 @@
                         <li><a href="{{route('user.create')}}">Create User</a></li>
                     </ul>
                 </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="fa fa-user-circle"></span><span class="mtext">Vendors</span>
+                    </a>
+                    <ul class="submenu">
+                        <li class="{{ $cramp1 == "Users" ? 'active': '' }}"><a href="{{route('vendor.index')}}">All Vendors</a></li>
+                        <li><a href="{{route('vendor.create')}}">Add New Vendor</a></li>
+                    </ul>
+                </li>
                 <li>
                     <a href="sitemap.php" class="dropdown-toggle no-arrow">
                         <span class="fa fa-sitemap"></span><span class="mtext">Sitemap</span>
