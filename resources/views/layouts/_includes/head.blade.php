@@ -1,6 +1,8 @@
 <!-- Basic Page Info -->
 <meta charset="utf-8">
-<title>DeskApp Dashboard</title>
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+<title>{{ config('app.name', 'Simbisa Portal') }}</title>
 
 <!-- Site favicon -->
 <!-- <link rel="shortcut icon" href="images/favicon.ico"> -->
@@ -12,4 +14,4 @@
 <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,500,600,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 <!-- CSS -->
-<link rel="stylesheet" href="vendors/styles/style.css">
+<link rel="stylesheet" href="{{asset('vendors/styles/style.css')}}">
