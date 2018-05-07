@@ -18,6 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/haa', function (){
-    return \Illuminate\Support\Facades\Response::json(\App\Model\Vendor::all());
-})->middleware('auth:api');
+Route::get('/vendor-api/index', 'Api\VendorApi@index');
