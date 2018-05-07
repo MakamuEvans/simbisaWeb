@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::get('/haa', function (){
+    return \Illuminate\Support\Facades\Response::json(\App\Model\Vendor::all());
+})->middleware('auth:api');
