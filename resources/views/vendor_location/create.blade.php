@@ -47,17 +47,24 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Location Tag *</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Location Name *</label>
                             <div class="col-sm-12 col-md-10">
-                                <input class="form-control" type="text" name="name" value="{{old('tag')}}"
-                                       placeholder="Location Tag">
+                                <input class="form-control" type="text" name="name" value="{{old('name')}}"
+                                       placeholder="Location Name">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-12 col-md-2 col-form-label">Location Name *</label>
+                            <label class="col-sm-12 col-md-2 col-form-label">Location Tag *</label>
                             <div class="col-sm-12 col-md-10">
-                                <input class="form-control" type="text" name="name" value="{{old('slang')}}"
-                                       placeholder="Location Name">
+                                <input class="form-control" type="text" name="tag" id="tag" value="{{old('tag')}}"
+                                       readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-12 col-md-2 col-form-label">Coordinate</label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control" type="text" name="geometry" id="geometry" value="{{old('geometry')}}"
+                                       readonly>
                             </div>
                         </div>
                         <div id="map" class="form-control form-group row" style="height: 400px"></div>
@@ -79,13 +86,14 @@
     </script>
     <script>
         $('#vendor_id').on('change', function() {
-            alert( this.value );
+            //alert( this.value );
         });
 
 
         var uluru;
         var service;
         var map;
+        var marker;
         navigator.geolocation.getCurrentPosition(function(location) {
             console.log(location.coords.latitude);
             console.log(location.coords.longitude);
@@ -98,7 +106,7 @@
             });
 
 
-            addmarker(uluru);
+          //  addmarker(uluru);
 
             var request = {
                 location: uluru,
@@ -133,34 +141,26 @@
 
                     var imageUrl = 'https://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png';
                     var myLatlng = new google.maps.LatLng(place.geometry.location.lat(),place.geometry.location.lng());
-                    var marker = new google.maps.Marker({
-                        position: myLatlng,
-                        title:place.name,
-                        icon: imageUrl,
+
+
+                    marker = new google.maps.Marker({
+                       map: map
                     });
 
-                    marker.setMap(map);
-
-                    google.maps.event.addListener(marker, "click", function (e) {
-
-                        var geocoder = new google.maps.Geocoder;
-
-                        latitude=e.latLng.lat();
-                        longitude=e.latLng.lng();
-                        var latlng = {lat: parseFloat(latitude), lng: parseFloat(longitude)};
-
-                        geocoder.geocode({'location': latlng}, function(results, status) {
-                            if (status === google.maps.GeocoderStatus.OK) {
-                                if (results[1]) {
-                                    console.log(results[1]);
-                                } else {
-                                    window.alert('No results found');
-                                }
-                            } else {
-                                window.alert('Geocoder failed due to: ' + status);
-                            }
-                        });
+                    marker.setPlace({
+                        placeId: place.place_id,
+                        location: place.geometry.location,
                     });
+                    marker.setVisible(true);
+
+                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                        return function() {
+                            console.log(results[i].name);
+                            $('#tag').val(results[i].place_id);
+                            $('#geometry').val(results[i].geometry.location.lat()+':'+results[i].geometry.location.lng());
+
+                        }
+                    })(marker, i));
                 }
             }
         }

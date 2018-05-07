@@ -33,6 +33,15 @@
                         <li class="{{ $cramp1 == "Users" ? 'active': '' }}"><a href="{{route('vendor.index')}}">All Vendors</a></li>
                         <li><a href="{{route('vendor.create')}}">New Vendor</a></li>
                         <li><a href="{{route('vendor-location.create')}}">New Vendor Location</a></li>
+                        <li><a href="{{route('vendor-menu.create')}}">New Vendor Menu</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="fa fa-user-circle"></span><span class="mtext">Clients</span>
+                    </a>
+                    <ul class="submenu">
+                        <li class="{{ $cramp1 == "Users" ? 'active': '' }}"><a href="{{route('client.index')}}">All Clients</a></li>
                     </ul>
                 </li>
                 <li>

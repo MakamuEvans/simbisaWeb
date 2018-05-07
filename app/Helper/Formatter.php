@@ -32,4 +32,30 @@ class Formatter
         }
     }
 
+    public static function clientActivation($status){
+        switch ($status){
+            case 1:
+                return 'Verified';
+                break;
+            case 0:
+                return 'Pending Verification';
+                break;
+            default:
+                return 'Unknown';
+        }
+    }
+
+    public static function decodeStatus($status){
+        switch ($status){
+            case 1:
+                return 'Active';
+                break;
+            case 0:
+                return 'Inactive';
+                break;
+            default:
+                return 'Unknown';
+        }
+    }
+
 }

@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LocationRequest;
-use App\Model\Vendor;
-use App\Model\VendorLocation;
+use App\Model\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
-class LocationController extends Controller
+class ClientController extends Controller
 {
     public function __construct()
     {
@@ -17,14 +15,13 @@ class LocationController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $cramp2 = "Vendor Locations";
-        $vendors = VendorLocation::where('vendor_id', $request->vendor);
-        return view('vendor_location.index', compact('vendors', 'cramp2'));
+        $cramp2 = "Clients";
+        $clients = Client::all();
+        return view('client.index', compact('clients', 'cramp2'));
     }
 
     /**
@@ -34,26 +31,18 @@ class LocationController extends Controller
      */
     public function create()
     {
-        $cramp2 = "Add New Vendor Location";
-        $vendors = Vendor::all();
-        return view('vendor_location.create', compact('cramp2', 'vendors'));
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  LocationRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(LocationRequest $request)
+    public function store(Request $request)
     {
-        if (Vendor::where('id', $request->vendor_id)->exists()){
-            $location = new VendorLocation($request->all());
-            $location->save();
-            return redirect()->route('vendor.index')->with("status", $location->name." Successfully Added");
-        }else{
-            return redirect()->route('vendor.index')->with("error", "An Error Occurred. Check your Details");
-        }
+        //
     }
 
     /**

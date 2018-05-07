@@ -21,3 +21,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/user', 'UserController');
 Route::resource('/vendor', 'VendorController');
 Route::resource('/vendor-location', 'LocationController');
+Route::resource('/vendor-menu', 'MenuController');
+Route::resource('/client', 'ClientController');

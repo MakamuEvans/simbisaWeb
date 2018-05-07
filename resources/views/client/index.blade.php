@@ -40,17 +40,21 @@
                             <thead>
                             <tr>
                                 <th class="table-plus datatable-nosort">Name</th>
-                                <th>Description</th>
+                                <th>Phone Number</th>
+                                <th>Status</th>
+                                <th>Phone Verification</th>
                                 <th>Created On</th>
                                 <th class="datatable-nosort">Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($vendors as $vendor)
+                            @foreach($clients as $client)
                                 <tr>
-                                    <td class="table-plus">{{$vendor->name}}</td>
-                                    <td>{{$vendor->description}}</td>
-                                    <td>{{$vendor->created_at}}</td>
+                                    <td class="table-plus">{{$client->name}}</td>
+                                    <td>{{$client->phone}}</td>
+                                    <td>{{\App\Helper\Formatter::clientActivation($client->activated)}}</td>
+                                    <td>{{\App\Helper\Formatter::decodeStatus($client->status)}}</td>
+                                    <td>{{$user->created_at}}</td>
                                     <td>
                                         <div class="dropdown">
                                             <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button"
@@ -58,8 +62,7 @@
                                                 <i class="fa fa-ellipsis-h"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="{{route('vendor.show', ['id'=>$vendor->id, 'type'=>'locations'])}}"><i class="fa fa-eye"></i> View Locations</a>
-                                                <a class="dropdown-item" href="{{route('vendor.show', ['id'=>$vendor->id, 'type'=>'menu'])}}"><i class="fa fa-eye"></i> View Menu</a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-eye"></i> View</a>
                                                 <a class="dropdown-item" href="#"><i class="fa fa-pencil"></i> Edit</a>
                                                 <a class="dropdown-item" href="#"><i class="fa fa-trash"></i> Delete</a>
                                             </div>
@@ -78,18 +81,18 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="src/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
-    <script src="src/plugins/datatables/media/js/dataTables.bootstrap4.js"></script>
-    <script src="src/plugins/datatables/media/js/dataTables.responsive.js"></script>
-    <script src="src/plugins/datatables/media/js/responsive.bootstrap4.js"></script>
+    <script src="{{asset('src/plugins/datatables/media/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('src/plugins/datatables/media/js/dataTables.bootstrap4.js')}}"></script>
+    <script src="{{asset('src/plugins/datatables/media/js/dataTables.responsive.js')}}"></script>
+    <script src="{{asset('src/plugins/datatables/media/js/responsive.bootstrap4.js')}}"></script>
     <!-- buttons for Export datatable -->
-    <script src="src/plugins/datatables/media/js/button/dataTables.buttons.js"></script>
-    <script src="src/plugins/datatables/media/js/button/buttons.bootstrap4.js"></script>
-    <script src="src/plugins/datatables/media/js/button/buttons.print.js"></script>
-    <script src="src/plugins/datatables/media/js/button/buttons.html5.js"></script>
-    <script src="src/plugins/datatables/media/js/button/buttons.flash.js"></script>
-    <script src="src/plugins/datatables/media/js/button/pdfmake.min.js"></script>
-    <script src="src/plugins/datatables/media/js/button/vfs_fonts.js"></script>
+    <script src="{{asset('src/plugins/datatables/media/js/button/dataTables.buttons.js')}}"></script>
+    <script src="{{asset('src/plugins/datatables/media/js/button/buttons.bootstrap4.js')}}"></script>
+    <script src="{{asset('src/plugins/datatables/media/js/button/buttons.print.js')}}"></script>
+    <script src="{{asset('src/plugins/datatables/media/js/button/buttons.html5.js')}}"></script>
+    <script src="{{asset('src/plugins/datatables/media/js/button/buttons.flash.js')}}"></script>
+    <script src="{{asset('src/plugins/datatables/media/js/button/pdfmake.min.js')}}"></script>
+    <script src="{{asset('src/plugins/datatables/media/js/button/vfs_fonts.js')}}"></script>
     <script>
         $('document').ready(function () {
             $('.data-table').DataTable({

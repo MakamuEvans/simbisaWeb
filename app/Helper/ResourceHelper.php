@@ -21,12 +21,12 @@ class ResourceHelper
      * @return bool
      */
 
-    public static function uploadFile(UploadedFile $file)
+    public static function uploadFile(UploadedFile $file, $path)
     {
         $name = $file->getClientOriginalName();
         $ext = $file->getClientOriginalExtension();
         $final_name = time() . '-' . $name . '.' . $ext;
-        $path = public_path('/img/vendor');
+        //$path = public_path('/img/vendor');
         if ($file->move($path, $final_name)){
             return $final_name;
         }

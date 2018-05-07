@@ -58,8 +58,7 @@
                                                 <i class="fa fa-ellipsis-h"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a class="dropdown-item" href="{{route('vendor.show', ['id'=>$vendor->id, 'type'=>'locations'])}}"><i class="fa fa-eye"></i> View Locations</a>
-                                                <a class="dropdown-item" href="{{route('vendor.show', ['id'=>$vendor->id, 'type'=>'menu'])}}"><i class="fa fa-eye"></i> View Menu</a>
+                                                <a class="dropdown-item" href="#"><i class="fa fa-eye"></i> View</a>
                                                 <a class="dropdown-item" href="#"><i class="fa fa-pencil"></i> Edit</a>
                                                 <a class="dropdown-item" href="#"><i class="fa fa-trash"></i> Delete</a>
                                             </div>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVendorLocationsTable extends Migration
+class CreateVendorMenusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateVendorLocationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('vendor_locations', function (Blueprint $table) {
+        Schema::create('vendor_menus', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('vendor_id')->unsigned();
             $table->string('name');
-            $table->string('geometry');
-            $table->string('tag'); //google map name
-            $table->string('slang')->nullable(); //common name
+            $table->string('description');
+            $table->string('img');
+            $table->string('price');
+            $table->string('status'); //0 unavailable 1 available
             $table->timestamps();
 
             //create table relationship
@@ -34,6 +35,6 @@ class CreateVendorLocationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vendor_locations');
+        Schema::dropIfExists('vendor_menus');
     }
 }

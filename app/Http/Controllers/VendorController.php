@@ -12,7 +12,7 @@ class VendorController extends Controller
 {
     public function __construct()
     {
-        View::share("cramp1", "Users");
+        View::share("cramp1", "Vendor");
     }
     /**
      * Display a listing of the resource.
@@ -46,7 +46,7 @@ class VendorController extends Controller
     public function store(VendorRequest $request)
     {
 
-        $upload_status = ResourceHelper::uploadFile($request->file('file'));
+        $upload_status = ResourceHelper::uploadFile($request->file('file'), public_path('/img/vendor'));
 
         if ($upload_status){
             $request['logo'] = $upload_status;
@@ -61,11 +61,22 @@ class VendorController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        //
+        if ($request->has('type')){
+            if ($request->type == 'locations'){
+                $vendor = Vendor::where('id', $id)->with('locations')->first();
+                $cramp2 = $vendor->name;
+            }else{
+                $vendor = Vendor::where('id', $id)->with('menus')->first();
+                $cramp2 = $vendor->name;
+            }
+            return \view('vendor.view', compact('vendor', 'cramp2', 'request'));
+        }
+        abort(403, "Not Allowed");
     }
 
     /**
