@@ -1,7 +1,7 @@
 <div class="left-side-bar">
     <div class="brand-logo">
         <a href="index.php">
-            <img src="vendors/images/deskapp-logo.png" alt="">
+            Simbisa
         </a>
     </div>
     <div class="menu-block customscroll">
@@ -31,7 +31,8 @@
                     </a>
                     <ul class="submenu">
                         <li class="{{ $cramp1 == "Users" ? 'active': '' }}"><a href="{{route('vendor.index')}}">All Vendors</a></li>
-                        <li><a href="{{route('vendor.create')}}">Add New Vendor</a></li>
+                        <li><a href="{{route('vendor.create')}}">New Vendor</a></li>
+                        <li><a href="{{route('vendor-location.create')}}">New Vendor Location</a></li>
                     </ul>
                 </li>
                 <li>

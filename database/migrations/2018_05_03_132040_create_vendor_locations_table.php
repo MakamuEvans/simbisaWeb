@@ -15,7 +15,15 @@ class CreateVendorLocationsTable extends Migration
     {
         Schema::create('vendor_locations', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('vendor_id')->unsigned();
+            $table->string('latitude');
+            $table->string('longitude');
+            $table->string('tag'); //google map name
+            $table->string('slang'); //common name
             $table->timestamps();
+
+            //create table relationship
+            $table->foreign('vendor_id')->references('id')->on('vendors');
         });
     }
 

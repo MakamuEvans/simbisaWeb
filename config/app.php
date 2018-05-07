@@ -159,7 +159,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\FormatterProvider::class,
+        App\Providers\HelperProvider::class,
 
     ],
 
@@ -210,6 +210,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Formatter' => App\Helper\Formatter::class,
+        'ResourceHelper'=>App\Helper\ResourceHelper::class,
 
     ],
 

@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class FormatterProvider extends ServiceProvider
+class HelperProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.
@@ -24,5 +24,6 @@ class FormatterProvider extends ServiceProvider
     public function register()
     {
         require_once app_path(). '/Helper/Formatter.php';
+        require_once app_path(). '/Helper/ResourceHelper.php';
     }
 }

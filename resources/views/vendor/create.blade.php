@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     @include('layouts._includes.alerts')
-                    <form method="post" action="{{route('vendor.create')}}">
+                    <form method="post" action="{{route('vendor.store')}}" enctype="multipart/form-data">
                         @csrf()
                         <div class="form-group row">
                             <label class="col-sm-12 col-md-2 col-form-label">Vendor Name *</label>
@@ -51,15 +51,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="fallback">
-                                <label class="col-sm-12 col-md-2 col-form-label">Vendor Logo</label>
-                                <div class="col-sm-12 col-md-10">
-
-                                </div>
-
+                            <label class="col-sm-12 col-md-2 col-form-label">Logo</label>
+                            <div class="col-sm-12 col-md-10">
+                                <input class="form-control" type="file" name="file">
                             </div>
                         </div>
-
                         <div class="form-group row">
                             <button type="submit" class="form-control btn btn-primary">Add Vendor</button>
                         </div>
@@ -78,7 +74,7 @@
         Dropzone.autoDiscover = false;
         $(".dropzone").dropzone({
             addRemoveLinks: true,
-            removedfile: function(file) {
+            removedfile: function (file) {
                 var name = file.name;
                 var _ref;
                 return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;

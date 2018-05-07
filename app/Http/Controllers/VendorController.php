@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\ResourceHelper;
+use App\Http\Requests\VendorRequest;
 use App\Model\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
@@ -38,12 +40,21 @@ class VendorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  VendorRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(VendorRequest $request)
     {
-        //
+
+        $upload_status = ResourceHelper::uploadFile($request->file('file'));
+
+        if ($upload_status){
+            $request['logo'] = $upload_status;
+            $vendor = new Vendor($request->all());
+            $vendor->save();
+            return redirect()->route('vendor.index')->with("status", $vendor->name." Successfully Created");
+        }
+        return redirect()->route('vendor.create')->with("error", "There was an error creating the Vendor. Please retry later");
     }
 
     /**
