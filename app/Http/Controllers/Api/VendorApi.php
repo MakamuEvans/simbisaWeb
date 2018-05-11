@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Model\Vendor;
+use App\Model\VendorMenu;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Response;
@@ -53,7 +54,13 @@ class VendorApi extends Controller
      */
     public function show($id)
     {
-        //
+        $menu = VendorMenu::where('vendor_id', $id)->get();
+        foreach ($menu as $data){
+            $data->server_id = $data->id;
+            $data->logo_url = $data->img;
+        }
+
+        return Response::json($menu);
     }
 
     /**

@@ -19,3 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::get('/vendor-api/index', 'Api\VendorApi@index');
+Route::get('/vendor-api/menu/{id}', 'Api\VendorApi@show');
+Route::get('/location-api/locations/', 'Api\LocationApi@getLocations');
