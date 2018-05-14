@@ -27,7 +27,7 @@ class LocationRequest extends FormRequest
             'vendor_id'=>'required',
             'name' => 'required|string|max:255',
             'geometry' => 'required|',
-            'tag' => 'required|'
+            'tag' => 'required|unique:vendor_locations'
         ];
     }
 }
