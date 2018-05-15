@@ -32,6 +32,11 @@ class Formatter
         }
     }
 
+    /**
+     * interpret client activation status
+     * @param $status
+     * @return string
+     */
     public static function clientActivation($status){
         switch ($status){
             case 1:
@@ -45,6 +50,11 @@ class Formatter
         }
     }
 
+    /**
+     * Interpret a status
+     * @param $status
+     * @return string
+     */
     public static function decodeStatus($status){
         switch ($status){
             case 1:
@@ -55,6 +65,30 @@ class Formatter
                 break;
             default:
                 return 'Unknown';
+        }
+    }
+
+    /**
+     * interpretation for different order statuses
+     * @param $status
+     * @return string
+     */
+    public static function decodeOrderStatus($status){
+        switch ($status){
+            case 0:
+                return 'Order Placed';
+                break;
+            case 1:
+                return 'Order Confirmed by Vendor';
+                break;
+            case 2:
+                return 'Preparations Done. Your order is in the delivery process';
+                break;
+            case 3:
+                return 'Order Delivered';
+                break;
+            default:
+                return "unknown";
         }
     }
 

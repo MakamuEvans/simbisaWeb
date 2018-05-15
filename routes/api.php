@@ -22,3 +22,4 @@ Route::get('/vendor-api/index', 'Api\VendorApi@index');
 Route::get('/vendor-api/menu/{id}', 'Api\VendorApi@show');
 Route::get('/location-api/locations/', 'Api\LocationApi@getLocations');
 Route::post('/order-api/order/', 'Api\OrderController@order');
+Route::get('/order-api/history/{phone}', 'Api\OrderController@orderHistory');

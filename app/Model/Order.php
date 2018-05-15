@@ -11,4 +11,11 @@ class Order extends Model
     public function orderDetails(){
         return $this->hasMany('App\Model\OrderDetail', 'order_id');
     }
+
+    public function orderStatuses(){
+        return $this->hasMany('App\Model\OrderStatus', 'order_id');
+    }
+    protected $casts = [
+        'status'=>'boolean'
+    ];
 }
