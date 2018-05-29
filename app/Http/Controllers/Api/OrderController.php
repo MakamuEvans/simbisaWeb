@@ -30,10 +30,12 @@ class OrderController extends Controller
         $menuz = array();
 
         foreach ($data['menu'] as $dt){
+            $menu = VendorMenu::findorFail($dt['menu_id']);
             $detail = new OrderDetail(array(
                 'order_id'=>$order->id,
                 'menu_id'=>$dt['menu_id'],
-                'quantity'=>$dt['quantity']
+                'quantity'=>$dt['quantity'],
+                'total_price'=>$dt['quantity']*$menu->price
             ));
             $detail->save();
 
@@ -57,7 +59,7 @@ class OrderController extends Controller
     }
 
     public function OrderHistory($phone_number){
-        $client = Client::where('phone', $phone_number)->with('orders.orderStatuses')->first();
+        $client = Client::where('phone', $phone_number)->with(['orders.orderStatuses','orders.orderDetails' ])->first();
         $client->server_id = $client['id'];
         return Response::json($client);
         //dd($client);

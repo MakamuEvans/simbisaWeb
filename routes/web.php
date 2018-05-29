@@ -11,15 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index');
 Route::resource('/user', 'UserController');
 Route::resource('/vendor', 'VendorController');
 Route::resource('/vendor-location', 'LocationController');
 Route::resource('/vendor-menu', 'MenuController');
 Route::resource('/client', 'ClientController');
+Route::resource('/client', 'ClientController');
+Route::resource('/orders', 'OrderController');

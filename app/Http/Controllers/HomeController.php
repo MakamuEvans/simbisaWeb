@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller
 {
@@ -13,6 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
+        View::share("cramp1", "Orders");
         $this->middleware('auth');
     }
 
@@ -23,6 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $cramp2 = "Home";
+        return view('home', compact('cramp2'));
     }
 }

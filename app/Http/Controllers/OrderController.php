@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Helper\ResourceHelper;
-use App\Http\Requests\MenuRequest;
-use App\Model\Vendor;
-use App\Model\VendorMenu;
+use App\Model\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
-class MenuController extends Controller
+class OrderController extends Controller
 {
     public function __construct()
     {
-        View::share("cramp1", "Menu");
+        View::share("cramp1", "Orders");
     }
     /**
      * Display a listing of the resource.
@@ -22,7 +19,10 @@ class MenuController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::orderBy('orders.id', 'desc')->with('orderDetails.menu')->get();
+        $cramp2 = "Orders";
+
+        return \view('orders.index', compact('orders', 'cramp2'));
     }
 
     /**
@@ -32,28 +32,18 @@ class MenuController extends Controller
      */
     public function create()
     {
-        $cramp2 = "Add New Vendor Menu";
-        $vendors = Vendor::all();
-        return view('vendor_menu.create', compact('cramp2', 'vendors'));
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  MenuRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(MenuRequest $request)
+    public function store(Request $request)
     {
-        $upload_status = ResourceHelper::uploadFile($request->file('file'), public_path('/img/menu'));
-
-        if ($upload_status){
-            $request['img'] = $upload_status;
-            $menu = new VendorMenu($request->all());
-            $menu->save();
-            return redirect()->route('vendor.index')->with("status", $menu->name." Successfully Created");
-        }
-        return redirect()->route('vendor.create')->with("error", "There was an error creating the Vendor. Please retry later");
+        //
     }
 
     /**
@@ -64,7 +54,9 @@ class MenuController extends Controller
      */
     public function show($id)
     {
-        //
+        $order = Order::findorFail($id);
+        $cramp2 = '#'.$id;
+        return \view('orders.view', compact('order', 'cramp2'));
     }
 
     /**

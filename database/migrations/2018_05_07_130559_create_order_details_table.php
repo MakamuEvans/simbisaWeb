@@ -18,6 +18,7 @@ class CreateOrderDetailsTable extends Migration
             $table->integer('order_id')->unsigned();
             $table->integer('menu_id')->unsigned();
             $table->string('quantity');
+            $table->string('total_price');
             $table->timestamps();
 
             //create table relationship

@@ -24,7 +24,7 @@ class Formatter
             case 2:
                 return "Vendor";
                 break;
-            case 2:
+            case 3:
                 return "Teller";
                 break;
             default:
@@ -86,6 +86,20 @@ class Formatter
                 break;
             case 3:
                 return 'Order Delivered';
+                break;
+            default:
+                return "unknown";
+        }
+    }
+
+
+    public static function decodeOrder($status){
+        switch ($status){
+            case 0:
+                return 'Still Processing';
+                break;
+            case 1:
+                return 'Finished';
                 break;
             default:
                 return "unknown";

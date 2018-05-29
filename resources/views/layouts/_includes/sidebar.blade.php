@@ -44,6 +44,14 @@
                         <li class="{{ $cramp1 == "Users" ? 'active': '' }}"><a href="{{route('client.index')}}">All Clients</a></li>
                     </ul>
                 </li>
+                <li class="dropdown">
+                    <a href="javascript:;" class="dropdown-toggle">
+                        <span class="fa fa-user-circle"></span><span class="mtext">Orders</span>
+                    </a>
+                    <ul class="submenu">
+                        <li class="{{ $cramp1 == "Users" ? 'active': '' }}"><a href="{{route('orders.index')}}">All Orders</a></li>
+                    </ul>
+                </li>
                 <li>
                     <a href="sitemap.php" class="dropdown-toggle no-arrow">
                         <span class="fa fa-sitemap"></span><span class="mtext">Sitemap</span>
