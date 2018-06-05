@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Order;
+use App\Model\OrderStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -91,5 +92,33 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function confirmOrder($id){
+        $confirm = new OrderStatus(array(
+            'order_id'=>$id,
+            'level'=>1
+        ));
+        $confirm->save();
+        return redirect()->back()->with('status', 'Order Confirmed');
+    }
+
+    public function notifyDelivery($id){
+        $confirm = new OrderStatus(array(
+            'order_id'=>$id,
+            'level'=>2
+        ));
+        $confirm->save();
+        return redirect()->back()->with('status', 'Delivery Initiated');
+    }
+
+    public function cancelOrder($id){
+        $confirm = new OrderStatus(array(
+            'order_id'=>$id,
+            'level'=>5
+        ));
+        $confirm->save();
+        $confirm->order->update(['status'=>true]);
+        return redirect()->back()->with('status', 'Order Cancelled Successfully');
     }
 }

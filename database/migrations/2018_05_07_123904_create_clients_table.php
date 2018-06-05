@@ -17,6 +17,7 @@ class CreateClientsTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable();
             $table->string('phone');
+            $table->string('activation_code')->nullable();
             $table->boolean('status')->default(true);
             $table->boolean('activated')->default(false);
             $table->timestamps();

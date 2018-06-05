@@ -51,7 +51,7 @@ class MenuController extends Controller
             $request['img'] = $upload_status;
             $menu = new VendorMenu($request->all());
             $menu->save();
-            return redirect()->route('vendor.index')->with("status", $menu->name." Successfully Created");
+            return redirect()->route('vendor-menu.create')->with("status", $menu->name." Successfully Created");
         }
         return redirect()->route('vendor.create')->with("error", "There was an error creating the Vendor. Please retry later");
     }

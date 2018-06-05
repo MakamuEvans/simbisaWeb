@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helper\DbHelper;
 use App\Helper\Formatter;
 use App\Model\Client;
 use App\Model\Order;
@@ -22,6 +23,8 @@ class OrderController extends Controller
         $order = new Order(array(
             'client_id'=>$data['client_id'],
             'location_id'=>$data['location_id'],
+            'delivery_longitude'=>$data['delivery_longitude'],
+            'delivery_latitude'=>$data['delivery_latitude'],
             'status'=>false
         ));
         $order->save();
@@ -59,9 +62,42 @@ class OrderController extends Controller
     }
 
     public function OrderHistory($phone_number){
-        $client = Client::where('phone', $phone_number)->with(['orders.orderStatuses','orders.orderDetails' ])->first();
-        $client->server_id = $client['id'];
-        return Response::json($client);
-        //dd($client);
+        if (Client::where('phone', $phone_number)->exists()){
+            $client = Client::where('phone', $phone_number)->with(['orders', 'orders.orderStatuses','orders.orderDetails' ])->first();
+            $client->server_id = $client['id'];
+            return Response::json($client);
+        }
+       abort(404);
+    }
+
+    public function addPhone($phone_number){
+        $client = Client::where('phone', $phone_number);
+        if ($client->exists()){
+            $client = $client->first();
+            if ($client->activated)
+                return Response::json(['success'=>true, 'client_id'=>$client->id]);
+            else{
+                $random_number = rand(10000, 999999);
+                $client->update(['activation_code'=>$random_number]);
+                return Response::json(['success'=>false,'exists'=>true]);
+            }
+        }else{
+            $random_number = rand(10000, 999999);
+            $new_client = new Client(array(
+                'phone'=>$phone_number,
+                'activation_code'=>$random_number
+            ));
+            $new_client->save();
+            return Response::json(['success'=>false, 'exists'=>false]);
+        }
+    }
+
+    public function verifyPhone($phone_number, $code){
+        $client = Client::where('phone', $phone_number)->first();
+        if ($client->activation_code == $code){
+            $client->update(['activated'=>true]);
+            return Response::json(['success'=>true, 'client_id'=>$client->id]);
+        }
+        return Response::json(['success'=>false]);
     }
 }

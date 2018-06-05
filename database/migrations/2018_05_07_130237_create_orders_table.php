@@ -17,6 +17,8 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->integer('client_id')->unsigned();
             $table->integer('location_id')->unsigned();
+            $table->bigInteger('delivery_latitude');
+            $table->bigInteger('delivery_longitude');
             $table->boolean('status')->default(false);
             $table->timestamps();
 

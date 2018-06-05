@@ -11,6 +11,10 @@ class OrderStatus extends Model
 
     protected $appends = ['note'];
 
+    public function order(){
+        return $this->belongsTo('App\Model\Order', 'order_id');
+    }
+
     public function getNoteAttribute(){
         return Formatter::decodeOrderStatus($this->level);
     }

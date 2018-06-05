@@ -94,6 +94,7 @@
             $('.data-table').DataTable({
                 scrollCollapse: true,
                 autoWidth: false,
+                order: [[ 0, "desc" ]],
                 responsive: true,
                 columnDefs: [{
                     targets: "datatable-nosort",

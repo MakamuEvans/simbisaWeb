@@ -15,6 +15,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index');
+Route::get('confirm_order/{id}', 'OrderController@confirmOrder')->name('confirm_order');
+Route::get('notify_delivery/{id}', 'OrderController@notifyDelivery')->name('notify_delivery');
+Route::get('cancel_order/{id}', 'OrderController@cancelOrder')->name('cancel_order');
 Route::resource('/user', 'UserController');
 Route::resource('/vendor', 'VendorController');
 Route::resource('/vendor-location', 'LocationController');

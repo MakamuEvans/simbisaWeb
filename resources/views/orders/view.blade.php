@@ -15,6 +15,11 @@
             font-size: 30px !important;
         }
     </style>
+    <script>
+        var data = {latitude: "{{$order->delivery_latitude}}", longitude: "{{$order->delivery_longitude}}"};
+        var haha = data.latitude;
+    </script>
+
 @endsection
 @section('content')
     <div class="main-container">
@@ -24,9 +29,15 @@
                     <div class="row">
                         @include('layouts._includes.cramps')
                         <div class="col-md-6 col-sm-12 text-right">
-                            <a href="" class="btn btn-primary">Confirm Order</a>
-                            <a href="" class="btn btn-primary">Notify Delivery Started</a>
-                            <a href="" class="btn btn-danger">Cancel Order</a>
+                            <a href="{{route('confirm_order', ['id'=>$order->id])}}"
+                               class="btn btn-primary {{$order->current_status->level >= 1 ? 'disabled': ''}}">Confirm
+                                Order</a>
+                            <a href="{{route('notify_delivery', ['id'=>$order->id])}}"
+                               class="btn btn-primary {{$order->current_status->level >= 2 ? 'disabled': ''}}">Notify
+                                Delivery Started</a>
+                            <a href="{{route('cancel_order', ['id'=>$order->id])}}"
+                               class="btn btn-danger {{$order->current_status->level >= 4  ? 'disabled': ''}}">Cancel
+                                Order</a>
                         </div>
                     </div>
                     @include('layouts._includes.alerts')
@@ -82,6 +93,12 @@
                                 </table>
                             </div>
                         </div>
+                        <div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
+                            <div class="col-md-12">
+                                <h1>Delivery Location</h1>
+                                <div id="map" class="form-control form-group row" style="height: 400px;"></div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-4">
                         <h3>Order Progress</h3>
@@ -126,6 +143,39 @@
     <script src="{{asset('src/plugins/datatables/media/js/button/buttons.flash.js')}}"></script>
     <script src="{{asset('src/plugins/datatables/media/js/button/pdfmake.min.js')}}"></script>
     <script src="{{asset('src/plugins/datatables/media/js/button/vfs_fonts.js')}}"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_x_HdSpXoOd7clgpovw6ypeYrqGsB7O4&libraries=places">
+    </script>
+    <script>
+        var uluru;
+        var service;
+        var map;
+        var marker;
+        var del_lat = {{$order->delivery_latitude}};
+        var del_lon = {{$order->delivery_longitude}};
+        $('document').ready(function () {
+            var uluru = {lat: del_lat, lng: del_lon};
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: uluru
+            });
+
+            var marker = new google.maps.Marker({
+                position: uluru,
+                map: map,
+                title: 'Delivery Location'
+            });
+
+            /*marker = new google.maps.Marker({
+                map: map
+            });
+
+            marker.setPlace({
+                position: uluru,
+            });*/
+            marker.setVisible(true);
+        });
+    </script>
     <script>
         $('document').ready(function () {
             $('.data-table').DataTable({

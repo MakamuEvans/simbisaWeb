@@ -54,7 +54,7 @@
                                     <td>{{$client->phone}}</td>
                                     <td>{{\App\Helper\Formatter::clientActivation($client->activated)}}</td>
                                     <td>{{\App\Helper\Formatter::decodeStatus($client->status)}}</td>
-                                    <td>{{$user->created_at}}</td>
+                                    <td>{{$client->created_at}}</td>
                                     <td>
                                         <div class="dropdown">
                                             <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button"

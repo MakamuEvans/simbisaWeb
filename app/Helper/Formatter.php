@@ -87,6 +87,9 @@ class Formatter
             case 3:
                 return 'Order Delivered';
                 break;
+            case 5:
+                return 'Order Cancelled by Vendor';
+                break;
             default:
                 return "unknown";
         }

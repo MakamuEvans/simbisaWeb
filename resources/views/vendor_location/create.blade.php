@@ -111,7 +111,7 @@
             var request = {
                 location: uluru,
                 radius: '5000',
-                query: 'Pizza Inn'
+                query: 'Chicken Inn'
             };
 
             service = new google.maps.places.PlacesService(map);
